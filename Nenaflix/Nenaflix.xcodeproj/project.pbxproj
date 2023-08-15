@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5918395A2A8BCFC6008CC19A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839592A8BCFC6008CC19A /* Movie.swift */; };
 		59903CEE2A8A9A7200E3158F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CED2A8A9A7200E3158F /* AppDelegate.swift */; };
 		59903CF02A8A9A7200E3158F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */; };
 		59903CF22A8A9A7200E3158F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CF12A8A9A7200E3158F /* ViewController.swift */; };
@@ -16,7 +17,9 @@
 		59903D082A8A9A7400E3158F /* NenaflixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D072A8A9A7400E3158F /* NenaflixTests.swift */; };
 		59903D122A8A9A7400E3158F /* NenaflixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D112A8A9A7400E3158F /* NenaflixUITests.swift */; };
 		59903D142A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D132A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift */; };
-		59903D212A8AA84100E3158F /* ViewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D202A8AA84100E3158F /* ViewCode.swift */; };
+		59903D212A8AA84100E3158F /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D202A8AA84100E3158F /* CodeView.swift */; };
+		59903D332A8BACB400E3158F /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D322A8BACB400E3158F /* APIController.swift */; };
+		59903D352A8BB9A000E3158F /* ButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D342A8BB9A000E3158F /* ButtonController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		591839592A8BCFC6008CC19A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		59903CEA2A8A9A7200E3158F /* Nenaflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nenaflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59903CED2A8A9A7200E3158F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +54,9 @@
 		59903D0D2A8A9A7400E3158F /* NenaflixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NenaflixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59903D112A8A9A7400E3158F /* NenaflixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NenaflixUITests.swift; sourceTree = "<group>"; };
 		59903D132A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NenaflixUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		59903D202A8AA84100E3158F /* ViewCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCode.swift; sourceTree = "<group>"; };
+		59903D202A8AA84100E3158F /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
+		59903D322A8BACB400E3158F /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		59903D342A8BB9A000E3158F /* ButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,12 +109,10 @@
 			children = (
 				59903CED2A8A9A7200E3158F /* AppDelegate.swift */,
 				59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */,
-				59903CF12A8A9A7200E3158F /* ViewController.swift */,
-				59903D202A8AA84100E3158F /* ViewCode.swift */,
-				59903CF92A8A9A7400E3158F /* Assets.xcassets */,
-				59903CFB2A8A9A7400E3158F /* LaunchScreen.storyboard */,
 				59903CFE2A8A9A7400E3158F /* Info.plist */,
-				59903CF62A8A9A7200E3158F /* Nenaflix.xcdatamodeld */,
+				59903D232A8AD6BE00E3158F /* View */,
+				59903D222A8AD6B600E3158F /* Model */,
+				59903D242A8AD6C600E3158F /* Controller */,
 			);
 			path = Nenaflix;
 			sourceTree = "<group>";
@@ -128,6 +132,35 @@
 				59903D132A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift */,
 			);
 			path = NenaflixUITests;
+			sourceTree = "<group>";
+		};
+		59903D222A8AD6B600E3158F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59903D232A8AD6BE00E3158F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				59903D202A8AA84100E3158F /* CodeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		59903D242A8AD6C600E3158F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				59903CF12A8A9A7200E3158F /* ViewController.swift */,
+				591839592A8BCFC6008CC19A /* Movie.swift */,
+				59903CF92A8A9A7400E3158F /* Assets.xcassets */,
+				59903CFB2A8A9A7400E3158F /* LaunchScreen.storyboard */,
+				59903CF62A8A9A7200E3158F /* Nenaflix.xcdatamodeld */,
+				59903D322A8BACB400E3158F /* APIController.swift */,
+				59903D342A8BB9A000E3158F /* ButtonController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,10 +294,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				59903CF22A8A9A7200E3158F /* ViewController.swift in Sources */,
-				59903D212A8AA84100E3158F /* ViewCode.swift in Sources */,
+				59903D212A8AA84100E3158F /* CodeView.swift in Sources */,
+				59903D332A8BACB400E3158F /* APIController.swift in Sources */,
 				59903CEE2A8A9A7200E3158F /* AppDelegate.swift in Sources */,
 				59903CF82A8A9A7200E3158F /* Nenaflix.xcdatamodeld in Sources */,
 				59903CF02A8A9A7200E3158F /* SceneDelegate.swift in Sources */,
+				5918395A2A8BCFC6008CC19A /* Movie.swift in Sources */,
+				59903D352A8BB9A000E3158F /* ButtonController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
