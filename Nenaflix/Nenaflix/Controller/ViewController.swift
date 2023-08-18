@@ -5,35 +5,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var collectionView: UICollectionView!
     var movies: [Movie] = []
+    var currentPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .black
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         view.addSubview(collectionView)
         
-        fetchMovieData()
+        fetchMovieData(page: 1)
+        
     }
     
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 150)
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        return layout
+            let spacing: CGFloat = 5
+            let screenWidth = view.bounds.width
+            let itemWidth = (screenWidth - 3 * spacing) / 2
+            layout.itemSize = CGSize(width: itemWidth, height: 400)
+            layout.minimumInteritemSpacing = 5
+            layout.minimumLineSpacing = -60
+            layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+            return layout
     }
     
-    func fetchMovieData() {
+    func fetchMovieData(page: Int) {
         let apiKey = "50c2aab4d2dcc02fc766580060480a1e"
         let baseURL = "https://api.themoviedb.org/3"
         let endpoint = "/movie/popular"
         let urlString = "\(baseURL)\(endpoint)?api_key=\(apiKey)"
         
-        // Criar a URL
         guard let url = URL(string: urlString) else {
                 print("Invalid URL")
                 return
@@ -63,7 +68,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                                 }
                                 DispatchQueue.main.async {
                                     self.collectionView.reloadData()
+                                    self.currentPage = page
                                 }
+//                                DispatchQueue.main.async {
+//                                    self.currentPage = page
                             }
                         } catch {
                             print("JSON Error: \(error)")
@@ -73,7 +81,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     task.resume()
                 }
     
-    // UICollectionViewDataSource methods
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -83,6 +91,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let movie = movies[indexPath.item]
         cell.configure(with: movie)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovie = movies[indexPath.item]
+        
+        let movieDetailVC = MovieDetailViewController()
+        movieDetailVC.movie = selectedMovie
+        
+        navigationController?.pushViewController(movieDetailVC, animated: true)
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            // Rolagem atingiu o final, carregue a próxima página
+            fetchMovieData(page: currentPage + 1)
+        
+        }
     }
 }
 
@@ -96,41 +124,48 @@ class MovieCell: UICollectionViewCell {
         super.init(frame: frame)
         
         posterImageView = UIImageView()
-        posterImageView.contentMode = .scaleAspectFit
+        posterImageView.contentMode = .scaleAspectFill
         contentView.addSubview(posterImageView)
         
         titleLabel = UILabel()
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
         contentView.addSubview(titleLabel)
         
         releaseDateLabel = UILabel()
         releaseDateLabel.font = UIFont.systemFont(ofSize: 14)
+        releaseDateLabel.textColor = .white
+        releaseDateLabel.textAlignment = .center
         contentView.addSubview(releaseDateLabel)
         
         overviewLabel = UILabel()
         overviewLabel.font = UIFont.systemFont(ofSize: 14)
         overviewLabel.numberOfLines = 3
+        overviewLabel.textColor = .white
         contentView.addSubview(overviewLabel)
         
-        // Set up constraints
         setupConstraints()
+
     }
     
     func setupConstraints() {
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        overviewLabel.translatesAutoresizingMaskIntoConstraints = false
+//        overviewLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            posterImageView.heightAnchor.constraint(equalToConstant: 100), // Adjust the height as needed
-            
-            titleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 4),
+            posterImageView.heightAnchor.constraint(equalToConstant: 250),
+                    
+            titleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: -60),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
             releaseDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

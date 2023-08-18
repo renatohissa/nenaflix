@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5918395A2A8BCFC6008CC19A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839592A8BCFC6008CC19A /* Movie.swift */; };
+		591839602A8ECCBE008CC19A /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5918395F2A8ECCBE008CC19A /* MovieDetailViewController.swift */; };
+		591839622A8EE5A4008CC19A /* FavoriteMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839612A8EE5A4008CC19A /* FavoriteMovieViewController.swift */; };
 		59903CEE2A8A9A7200E3158F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CED2A8A9A7200E3158F /* AppDelegate.swift */; };
 		59903CF02A8A9A7200E3158F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */; };
 		59903CF22A8A9A7200E3158F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CF12A8A9A7200E3158F /* ViewController.swift */; };
@@ -41,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		591839592A8BCFC6008CC19A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		5918395F2A8ECCBE008CC19A /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		591839612A8EE5A4008CC19A /* FavoriteMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewController.swift; sourceTree = "<group>"; };
 		59903CEA2A8A9A7200E3158F /* Nenaflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nenaflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59903CED2A8A9A7200E3158F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				59903CF12A8A9A7200E3158F /* ViewController.swift */,
+				5918395F2A8ECCBE008CC19A /* MovieDetailViewController.swift */,
+				591839612A8EE5A4008CC19A /* FavoriteMovieViewController.swift */,
 				591839592A8BCFC6008CC19A /* Movie.swift */,
 				59903CF92A8A9A7400E3158F /* Assets.xcassets */,
 				59903CFB2A8A9A7400E3158F /* LaunchScreen.storyboard */,
@@ -294,12 +300,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				59903CF22A8A9A7200E3158F /* ViewController.swift in Sources */,
+				591839622A8EE5A4008CC19A /* FavoriteMovieViewController.swift in Sources */,
 				59903D212A8AA84100E3158F /* CodeView.swift in Sources */,
 				59903D332A8BACB400E3158F /* APIController.swift in Sources */,
 				59903CEE2A8A9A7200E3158F /* AppDelegate.swift in Sources */,
 				59903CF82A8A9A7200E3158F /* Nenaflix.xcdatamodeld in Sources */,
 				59903CF02A8A9A7200E3158F /* SceneDelegate.swift in Sources */,
 				5918395A2A8BCFC6008CC19A /* Movie.swift in Sources */,
+				591839602A8ECCBE008CC19A /* MovieDetailViewController.swift in Sources */,
 				59903D352A8BB9A000E3158F /* ButtonController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
