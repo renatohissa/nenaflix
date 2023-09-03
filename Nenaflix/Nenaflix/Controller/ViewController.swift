@@ -4,8 +4,7 @@ import Foundation
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView!
-    var movies: [Movie] = []
-    var currentPage = 1
+    public var movies: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,12 +14,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         view.addSubview(collectionView)
-        
-        fetchMovieData(page: 1)
-        
+        fetchMovieData()
     }
-    
+
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
             let spacing: CGFloat = 5
@@ -33,7 +31,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             return layout
     }
     
-    func fetchMovieData(page: Int) {
+    func fetchMovieData() {
         let apiKey = "50c2aab4d2dcc02fc766580060480a1e"
         let baseURL = "https://api.themoviedb.org/3"
         let endpoint = "/movie/popular"
@@ -68,10 +66,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                                 }
                                 DispatchQueue.main.async {
                                     self.collectionView.reloadData()
-                                    self.currentPage = page
                                 }
-//                                DispatchQueue.main.async {
-//                                    self.currentPage = page
+
                             }
                         } catch {
                             print("JSON Error: \(error)")
@@ -79,8 +75,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     }
                     
                     task.resume()
-                }
-    
+                if UserDefaults.standard.dictionary(forKey: "favoriteMovies") == nil {
+                UserDefaults.standard.set([String: Bool](), forKey: "favoriteMovies")
+            }
+        }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -92,33 +90,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.configure(with: movie)
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = movies[indexPath.item]
         
         let movieDetailVC = MovieDetailViewController()
         movieDetailVC.movie = selectedMovie
         
+        // Oculta a UITabBar antes de empurrar a minhaViewController
+        movieDetailVC.hidesBottomBarWhenPushed = true
+        
         navigationController?.pushViewController(movieDetailVC, animated: true)
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offsetY > contentHeight - scrollView.frame.size.height {
-            // Rolagem atingiu o final, carregue a próxima página
-            fetchMovieData(page: currentPage + 1)
-        
-        }
     }
 }
 
-class MovieCell: UICollectionViewCell {
+    class MovieCell: UICollectionViewCell {
+    
     var posterImageView: UIImageView!
     var titleLabel: UILabel!
     var releaseDateLabel: UILabel!
     var overviewLabel: UILabel!
+    var favoriteImageView: UIImageView!
+    var isFavorite: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -146,17 +138,47 @@ class MovieCell: UICollectionViewCell {
         overviewLabel.textColor = .white
         contentView.addSubview(overviewLabel)
         
+        favoriteImageView = UIImageView(image: UIImage(named: "heart_black"))
+        favoriteImageView.contentMode = .scaleAspectFit
+        contentView.addSubview(favoriteImageView)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleHeartTap(_:)))
+        favoriteImageView.addGestureRecognizer(tapGesture)
+        favoriteImageView.isUserInteractionEnabled = true
+
+
         setupConstraints()
 
     }
     
+    @objc func handleHeartTap(_ sender: UITapGestureRecognizer) {
+        let touchPoint = sender.location(in: self)
+        
+        if favoriteImageView.frame.contains(touchPoint) {
+            isFavorite = !isFavorite
+            favoriteImageView.image = isFavorite ? UIImage(named: "heart_red") : UIImage(named: "heart_black")
+
+            
+            var favoriteMovies = UserDefaults.standard.dictionary(forKey: "favoriteMovies") ?? [String: Bool]()
+            favoriteMovies[self.titleLabel.text ?? ""] = isFavorite
+            UserDefaults.standard.set(favoriteMovies, forKey: "favoriteMovies")
+        }
+    }
+
     func setupConstraints() {
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-//        overviewLabel.translatesAutoresizingMaskIntoConstraints = false
+        overviewLabel.translatesAutoresizingMaskIntoConstraints = false
+        favoriteImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            
+            favoriteImageView.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: -37),
+            favoriteImageView.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 22),
+            favoriteImageView.widthAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 0.20),
+            favoriteImageView.heightAnchor.constraint(equalTo: favoriteImageView.widthAnchor),
+            
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -176,6 +198,7 @@ class MovieCell: UICollectionViewCell {
             overviewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             overviewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+        
     }
     
     required init?(coder: NSCoder) {
@@ -191,6 +214,22 @@ class MovieCell: UICollectionViewCell {
             let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
             posterImageView.load(url: posterURL)
         }
+        let favoriteMovies = UserDefaults.standard.dictionary(forKey: "favoriteMovies") as? [String: Bool] ?? [String: Bool]()
+                isFavorite = favoriteMovies[movie.title] ?? false
+                favoriteImageView.image = isFavorite ? UIImage(named: "heart_red") : UIImage(named: "heart_black")
+    }
+}
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        var responder: UIResponder? = self
+        while let nextResponder = responder?.next {
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+            responder = nextResponder
+        }
+        return nil
     }
 }
 

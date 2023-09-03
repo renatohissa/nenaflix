@@ -10,6 +10,16 @@
 		5918395A2A8BCFC6008CC19A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839592A8BCFC6008CC19A /* Movie.swift */; };
 		591839602A8ECCBE008CC19A /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5918395F2A8ECCBE008CC19A /* MovieDetailViewController.swift */; };
 		591839622A8EE5A4008CC19A /* FavoriteMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839612A8EE5A4008CC19A /* FavoriteMovieViewController.swift */; };
+		591839652A9115B4008CC19A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839642A9115B4008CC19A /* FeedViewController.swift */; };
+		591839672A9115C1008CC19A /* FeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839662A9115C1008CC19A /* FeedInteractor.swift */; };
+		591839692A9115CD008CC19A /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839682A9115CD008CC19A /* FeedPresenter.swift */; };
+		5918396B2A911707008CC19A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5918396A2A911707008CC19A /* FeedView.swift */; };
+		5918396D2A94032F008CC19A /* FavoriteMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5918396C2A94032F008CC19A /* FavoriteMovieCell.swift */; };
+		591839FB2A9D4284008CC19A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839FA2A9D4284008CC19A /* UIView.swift */; };
+		591839FD2A9D44AB008CC19A /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591839FC2A9D44AB008CC19A /* UITableViewCell.swift */; };
+		59183A4B2A9E8925008CC19A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59183A4A2A9E8925008CC19A /* File.swift */; };
+		59183A4F2A9FDD4B008CC19A /* Fila2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59183A4E2A9FDD4B008CC19A /* Fila2.swift */; };
+		59183A512AA336B7008CC19A /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59183A502AA336B7008CC19A /* LogIn.swift */; };
 		59903CEE2A8A9A7200E3158F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CED2A8A9A7200E3158F /* AppDelegate.swift */; };
 		59903CF02A8A9A7200E3158F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */; };
 		59903CF22A8A9A7200E3158F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903CF12A8A9A7200E3158F /* ViewController.swift */; };
@@ -20,8 +30,6 @@
 		59903D122A8A9A7400E3158F /* NenaflixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D112A8A9A7400E3158F /* NenaflixUITests.swift */; };
 		59903D142A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D132A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift */; };
 		59903D212A8AA84100E3158F /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D202A8AA84100E3158F /* CodeView.swift */; };
-		59903D332A8BACB400E3158F /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D322A8BACB400E3158F /* APIController.swift */; };
-		59903D352A8BB9A000E3158F /* ButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59903D342A8BB9A000E3158F /* ButtonController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +53,16 @@
 		591839592A8BCFC6008CC19A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		5918395F2A8ECCBE008CC19A /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		591839612A8EE5A4008CC19A /* FavoriteMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewController.swift; sourceTree = "<group>"; };
+		591839642A9115B4008CC19A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		591839662A9115C1008CC19A /* FeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedInteractor.swift; sourceTree = "<group>"; };
+		591839682A9115CD008CC19A /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
+		5918396A2A911707008CC19A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		5918396C2A94032F008CC19A /* FavoriteMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCell.swift; sourceTree = "<group>"; };
+		591839FA2A9D4284008CC19A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		591839FC2A9D44AB008CC19A /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		59183A4A2A9E8925008CC19A /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		59183A4E2A9FDD4B008CC19A /* Fila2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fila2.swift; sourceTree = "<group>"; };
+		59183A502AA336B7008CC19A /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		59903CEA2A8A9A7200E3158F /* Nenaflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nenaflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59903CED2A8A9A7200E3158F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,8 +77,6 @@
 		59903D112A8A9A7400E3158F /* NenaflixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NenaflixUITests.swift; sourceTree = "<group>"; };
 		59903D132A8A9A7400E3158F /* NenaflixUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NenaflixUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		59903D202A8AA84100E3158F /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
-		59903D322A8BACB400E3158F /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
-		59903D342A8BB9A000E3158F /* ButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,10 +104,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		591839632A91143E008CC19A /* FeedMovie */ = {
+			isa = PBXGroup;
+			children = (
+				591839642A9115B4008CC19A /* FeedViewController.swift */,
+				591839662A9115C1008CC19A /* FeedInteractor.swift */,
+				591839682A9115CD008CC19A /* FeedPresenter.swift */,
+				5918396A2A911707008CC19A /* FeedView.swift */,
+			);
+			path = FeedMovie;
+			sourceTree = "<group>";
+		};
 		59903CE12A8A9A7200E3158F = {
 			isa = PBXGroup;
 			children = (
 				59903CEC2A8A9A7200E3158F /* Nenaflix */,
+				59903D202A8AA84100E3158F /* CodeView.swift */,
 				59903D062A8A9A7400E3158F /* NenaflixTests */,
 				59903D102A8A9A7400E3158F /* NenaflixUITests */,
 				59903CEB2A8A9A7200E3158F /* Products */,
@@ -114,9 +142,10 @@
 				59903CED2A8A9A7200E3158F /* AppDelegate.swift */,
 				59903CEF2A8A9A7200E3158F /* SceneDelegate.swift */,
 				59903CFE2A8A9A7400E3158F /* Info.plist */,
-				59903D232A8AD6BE00E3158F /* View */,
 				59903D222A8AD6B600E3158F /* Model */,
+				59903D232A8AD6BE00E3158F /* View */,
 				59903D242A8AD6C600E3158F /* Controller */,
+				591839632A91143E008CC19A /* FeedMovie */,
 			);
 			path = Nenaflix;
 			sourceTree = "<group>";
@@ -148,7 +177,6 @@
 		59903D232A8AD6BE00E3158F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				59903D202A8AA84100E3158F /* CodeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,17 +184,29 @@
 		59903D242A8AD6C600E3158F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				59183A502AA336B7008CC19A /* LogIn.swift */,
 				59903CF12A8A9A7200E3158F /* ViewController.swift */,
 				5918395F2A8ECCBE008CC19A /* MovieDetailViewController.swift */,
 				591839612A8EE5A4008CC19A /* FavoriteMovieViewController.swift */,
 				591839592A8BCFC6008CC19A /* Movie.swift */,
+				591839FA2A9D4284008CC19A /* UIView.swift */,
+				59183A4E2A9FDD4B008CC19A /* Fila2.swift */,
+				59183A4A2A9E8925008CC19A /* File.swift */,
+				591839FC2A9D44AB008CC19A /* UITableViewCell.swift */,
+				5918396C2A94032F008CC19A /* FavoriteMovieCell.swift */,
+				599DF0BF2AA49DF100E4E514 /* Supporting */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		599DF0BF2AA49DF100E4E514 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
 				59903CF92A8A9A7400E3158F /* Assets.xcassets */,
 				59903CFB2A8A9A7400E3158F /* LaunchScreen.storyboard */,
 				59903CF62A8A9A7200E3158F /* Nenaflix.xcdatamodeld */,
-				59903D322A8BACB400E3158F /* APIController.swift */,
-				59903D342A8BB9A000E3158F /* ButtonController.swift */,
 			);
-			path = Controller;
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,16 +339,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5918396B2A911707008CC19A /* FeedView.swift in Sources */,
+				591839692A9115CD008CC19A /* FeedPresenter.swift in Sources */,
 				59903CF22A8A9A7200E3158F /* ViewController.swift in Sources */,
+				59183A4F2A9FDD4B008CC19A /* Fila2.swift in Sources */,
 				591839622A8EE5A4008CC19A /* FavoriteMovieViewController.swift in Sources */,
+				5918396D2A94032F008CC19A /* FavoriteMovieCell.swift in Sources */,
+				591839672A9115C1008CC19A /* FeedInteractor.swift in Sources */,
 				59903D212A8AA84100E3158F /* CodeView.swift in Sources */,
-				59903D332A8BACB400E3158F /* APIController.swift in Sources */,
+				59183A4B2A9E8925008CC19A /* File.swift in Sources */,
 				59903CEE2A8A9A7200E3158F /* AppDelegate.swift in Sources */,
+				591839FD2A9D44AB008CC19A /* UITableViewCell.swift in Sources */,
 				59903CF82A8A9A7200E3158F /* Nenaflix.xcdatamodeld in Sources */,
 				59903CF02A8A9A7200E3158F /* SceneDelegate.swift in Sources */,
+				591839652A9115B4008CC19A /* FeedViewController.swift in Sources */,
+				59183A512AA336B7008CC19A /* LogIn.swift in Sources */,
+				591839FB2A9D4284008CC19A /* UIView.swift in Sources */,
 				5918395A2A8BCFC6008CC19A /* Movie.swift in Sources */,
 				591839602A8ECCBE008CC19A /* MovieDetailViewController.swift in Sources */,
-				59903D352A8BB9A000E3158F /* ButtonController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

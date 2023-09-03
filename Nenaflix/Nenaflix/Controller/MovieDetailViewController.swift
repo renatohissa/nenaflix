@@ -1,9 +1,3 @@
-//
-//  MovieDetailViewController.swift
-//  Nenaflix
-//
-//  Created by Renato Pinheiro Hissa on 17/08/23.
-//
 
 import UIKit
 
@@ -49,6 +43,7 @@ class MovieDetailViewController: UIViewController {
         
         setupUI()
         loadMovieDetails()
+        
     }
     
     private func setupUI() {
