@@ -1,10 +1,11 @@
 import UIKit
 import Foundation
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class FeedMovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView!
     public var movies: [Movie] = []
+    var favoriteMovies: [String : Bool] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,19 +17,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.dataSource = self
         
         view.addSubview(collectionView)
+        if let favoriteMoviesDict = UserDefaults.standard.dictionary(forKey: "favoriteMovies") as? [String : Bool] {
+            favoriteMovies = favoriteMoviesDict
+        }
         fetchMovieData()
     }
-
+    
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-            let spacing: CGFloat = 5
-            let screenWidth = view.bounds.width
-            let itemWidth = (screenWidth - 3 * spacing) / 2
-            layout.itemSize = CGSize(width: itemWidth, height: 400)
-            layout.minimumInteritemSpacing = 5
-            layout.minimumLineSpacing = -60
-            layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-            return layout
+        let spacing: CGFloat = 5
+        let screenWidth = view.bounds.width
+        let itemWidth = (screenWidth - 3 * spacing) / 2
+        layout.itemSize = CGSize(width: itemWidth, height: 400)
+        layout.minimumInteritemSpacing = 5
+        layout.minimumLineSpacing = -60
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        return layout
     }
     
     func fetchMovieData() {
@@ -38,47 +42,48 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let urlString = "\(baseURL)\(endpoint)?api_key=\(apiKey)"
         
         guard let url = URL(string: urlString) else {
-                print("Invalid URL")
+            print("Invalid URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
                 return
             }
             
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    print("Error: \(error)")
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No data received")
-                    return
-                }
-                do {
-                            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                            if let results = json["results"] as? [[String: Any]] {
-                                for result in results {
-                                    if let title = result["title"] as? String,
-                                       let releaseDate = result["release_date"] as? String,
-                                       let overview = result["overview"] as? String,
-                                       let posterPath = result["poster_path"] as? String {
-                                        let movie = Movie(title: title, releaseDate: releaseDate, overview: overview, posterPath: posterPath)
-                                        self.movies.append(movie)
-                                    }
-                                }
-                                DispatchQueue.main.async {
-                                    self.collectionView.reloadData()
-                                }
-
-                            }
-                        } catch {
-                            print("JSON Error: \(error)")
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                if let results = json["results"] as? [[String: Any]] {
+                    for result in results {
+                        if let title = result["title"] as? String,
+                           let releaseDate = result["release_date"] as? String,
+                           let overview = result["overview"] as? String,
+                           let posterPath = result["poster_path"] as? String {
+                            let movie = Movie(title: title, releaseDate: releaseDate, overview: overview, posterPath: posterPath)
+                            self.movies.append(movie)
                         }
                     }
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                     
-                    task.resume()
-                if UserDefaults.standard.dictionary(forKey: "favoriteMovies") == nil {
-                UserDefaults.standard.set([String: Bool](), forKey: "favoriteMovies")
+                }
+            } catch {
+                print("JSON Error: \(error)")
             }
         }
+        
+        task.resume()
+        // para não bugar a repetiçao usando a tabbar
+        if UserDefaults.standard.dictionary(forKey: "favoriteMovies") == nil {
+            UserDefaults.standard.set([String: Bool](), forKey: "favoriteMovies")
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -87,9 +92,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
         let movie = movies[indexPath.item]
+        
         cell.configure(with: movie)
+        
+        // Verifique se o filme é favorito e atualize a célula de acordo
+        if let isFavorite = favoriteMovies[movie.title], isFavorite {
+            cell.favoriteImageView.image = UIImage(named: "heart_red")
+            cell.isFavorite = true
+        } else {
+            cell.favoriteImageView.image = UIImage(named: "heart_black")
+            cell.isFavorite = false
+        }
+        
         return cell
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = movies[indexPath.item]
         
@@ -100,6 +118,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         movieDetailVC.hidesBottomBarWhenPushed = true
         
         navigationController?.pushViewController(movieDetailVC, animated: true)
+    }
+    func getFavoriteMovies() -> [Movie] {
+        var favoriteMovies: [Movie] = []
+
+        if let favoriteMoviesDict = UserDefaults.standard.dictionary(forKey: "favoriteMovies") as? [String: Bool] {
+            for movie in movies {
+                if let isFavorite = favoriteMoviesDict[movie.title], isFavorite {
+                    favoriteMovies.append(movie)
+                }
+            }
+        }
+
+        return favoriteMovies
     }
 }
 
@@ -151,21 +182,25 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     }
     
-    @objc func handleHeartTap(_ sender: UITapGestureRecognizer) {
-        let touchPoint = sender.location(in: self)
-        
-        if favoriteImageView.frame.contains(touchPoint) {
-            isFavorite = !isFavorite
-            favoriteImageView.image = isFavorite ? UIImage(named: "heart_red") : UIImage(named: "heart_black")
-
+        @objc func handleHeartTap(_ sender: UITapGestureRecognizer) {
+            let touchPoint = sender.location(in: self)
             
-            var favoriteMovies = UserDefaults.standard.dictionary(forKey: "favoriteMovies") ?? [String: Bool]()
-            favoriteMovies[self.titleLabel.text ?? ""] = isFavorite
-            UserDefaults.standard.set(favoriteMovies, forKey: "favoriteMovies")
+            if favoriteImageView.frame.contains(touchPoint) {
+                isFavorite = !isFavorite
+                favoriteImageView.image = isFavorite ? UIImage(named: "heart_red") : UIImage(named: "heart_black")
+                
+                // Atualize o dicionário de filmes favoritos na classe ViewController
+                if let viewController = parentViewController as? FeedMovieViewController, let movieTitle = titleLabel.text {
+                    viewController.favoriteMovies[movieTitle] = isFavorite
+                    
+                    // Atualize o UserDefaults com os filmes favoritos
+                    UserDefaults.standard.set(viewController.favoriteMovies, forKey: "favoriteMovies")
+                }
+            }
         }
-    }
 
     func setupConstraints() {
+        
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
